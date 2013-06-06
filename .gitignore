@@ -5,9 +5,11 @@ env/
 *.sqlite3
 *.db
 persondb
-testJobs42/*.pyc
-testJobs42/personalinfo/*.pyc
+test42cc/*.pyc
+test42cc/person/*.pyc
+test42cc/*.py~
+test42cc/person/*.py~
 cache
 django_cache
-testJobs/.idea
+test42cc/.idea
 *.py~
