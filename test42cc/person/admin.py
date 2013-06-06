@@ -6,5 +6,9 @@ from models import *
 class PersonAdmin(admin.ModelAdmin):
     pass
 
+class HttpStoredQueryAdmin(admin.ModelAdmin):
+    list_display = ['path', 'method','user','date_with_time']
+
 
 admin.site.register(Person, PersonAdmin)
+admin.site.register(HttpStoredQuery, HttpStoredQueryAdmin)
