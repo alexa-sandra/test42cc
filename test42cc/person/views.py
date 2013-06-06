@@ -7,7 +7,7 @@ from django.shortcuts import render
 from django.template import loader, Context
 from sorl.thumbnail.fields import ImageField
 from models import Person
-from forms import PersonForm
+#from forms import PersonForm
 
 def index(request):
     try:

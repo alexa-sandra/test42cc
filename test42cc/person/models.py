@@ -21,3 +21,9 @@ class Person(models.Model):
     def __unicode__(self):
         return u"%s %s" % (self.last_name, self.first_name)
 
+
+class HttpStoredQuery(models.Model):
+    path = models.CharField(max_length=300)
+    method = models.CharField(max_length=20)
+    user = models.ForeignKey(User, blank=True, null=True)
+    date_with_time = models.DateTimeField(auto_now=True)
