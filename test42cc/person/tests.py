@@ -35,6 +35,7 @@ class PersonTestCase(unittest.TestCase):
         self.find(str(person.jabber))
         self.find(str(person.skype))
 
+
 class HttpStoredQueryMiddlewareTest(unittest.TestCase):
 
     def setUp(self):
@@ -46,5 +47,15 @@ class HttpStoredQueryMiddlewareTest(unittest.TestCase):
         self.assertEqual(self.m.process_request(self.request), None)
         self.assertIsInstance(self.request.path, HttpStoredQuery)
         self.assertEqual(self.request.path, data['path'])
+
+        
+class ContextProcessorTest(unittest.TestCase):
+    """
+    Test contextProcessor
+    """
+    def test_settings_in_context(self):
+        self.response = Client().get(reverse('/'))
+        self.assertEqual(settings, self.response.context['settings'])
+        self.assertTrue('settings' in self.response.context)
         
 
