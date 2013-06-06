@@ -34,5 +34,17 @@ class PersonTestCase(unittest.TestCase):
         self.find(str(person.email))
         self.find(str(person.jabber))
         self.find(str(person.skype))
+
+class HttpStoredQueryMiddlewareTest(unittest.TestCase):
+
+    def setUp(self):
+        self.m = HttpStoredQueryMiddleware()
+        self.request = HttpStoredQuery()
+
+    def test_request(self):
+        data = {'path': '/admin', 'method' : 'POST'}
+        self.assertEqual(self.m.process_request(self.request), None)
+        self.assertIsInstance(self.request.path, HttpStoredQuery)
+        self.assertEqual(self.request.path, data['path'])
         
 
