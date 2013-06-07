@@ -57,5 +57,52 @@ class ContextProcessorTest(unittest.TestCase):
         self.response = Client().get(reverse('/'))
         self.assertEqual(settings, self.response.context['settings'])
         self.assertTrue('settings' in self.response.context)
-        
 
+
+class TestEditForm(unittest.TestCase):
+    """
+    Test edit form
+    """
+    def setUp(self):
+        self.client = Client()
+
+    def test_login(self):
+        response = self.client.get('login')
+        self.assertEqual(response.status_code, 200)
+
+    def test_edit_form(self):
+        user = User.objects.get(pk=1)
+        # User not logged in
+        response = self.client.get('edit')
+        self.assertEqual(response.status_code, 403)
+
+        self.client.login(username=user.username, password='admin')
+
+        # Valid user
+        response = self.client.get('edit')
+        self.assertEqual(response.status_code, 200)
+
+        #Form
+        new_data = Person.objects.values().get(id=1)
+        new_data['birth_date'] = '1987-12-13'
+
+        self.client.post('edit', data=new_data)
+        response = self.client.get('edit')
+        self.assertContains(response, '')
+
+
+class EditLinkTagTest(unittest.TestCase):
+    """
+    Test for template tag for edit object from template in admin site
+    """
+    def setUp(self):
+        self.obj = Person.objects.get(pk=1)
+        self.client = Client()
+
+    def testEditLinkObject(self):
+        t = Template('{% load edit_link %}{% admin_link obj %}')
+        self.client.login(username="admin", password="admin")
+        admin_edit_link = edit_link_in_admin('',self.obj)
+        c = Context({"obj": self.obj})
+        result = t.render(c)
+        self.assertEqual(admin_edit_link, result.lstrip())
