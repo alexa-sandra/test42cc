@@ -24,7 +24,7 @@ def edit(request):
         return render(request,'index.html',{'info':None})
 
     if request.method == 'POST':
-        form = PersonForm(request.POST, request.FILES)
+        form = PersonForm(request.POST, request.FILES, instance=info)
         if form.is_valid():
             if request.FILES:
                 form.cleaned_data['photo'] = request.FILES['photo']

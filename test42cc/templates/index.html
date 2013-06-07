@@ -3,29 +3,31 @@
 {% block content %}
  <div style="width:750px">
     {% if user.is_authenticated %}
-
+        <a href="{% url 'edit' %}">Edit</a>&nbsp;
+        <a href="{% url 'logout' %}">Logout</a>
     {% endif %}
     {% if info %}
         <div style="float:left; width:300px">
         <p>Имя:{{ info.first_name }}</p>
         <p>Фамилия:{{ info.last_name }}</p>
         <p>Дата рождения:{{ info.birth_date|date:'d-m-Y' }}</p>
+        {% if info.photo %}
+            <img src="{{ info.photo.url }}" width="300" height="400" alt="">
+       {% endif %}
 
- </div>
-<div style="float:right; width:300px">
+        </div>
+        <div style="float:right; width:300px">
         <p>e-mail:{{ info.email }}</p>
         <p>jabber:{{ info.jabber }}</p>
         <p>skype:{{ info.skype }}</p>
         <p style = "height:300">Другое:{{ info.other_contacts|safe }}</p>
         <p>Биография:{{ info.bio|safe }}</p>
 
-</div>
+        </div>
     {% else %}
    <p>Данных нет</p>
 {% endif %}
-<div style="float:right;">
- </div>
- </div>
+</div>
 <div>
     <a href="/admin/person/httpstoredquery/">queries</a>
 </div>
