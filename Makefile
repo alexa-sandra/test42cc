@@ -1,3 +1,6 @@
+MANAGE=django-admin.py
+PROJECT=test42cc
+
 clean:
 	-rm *~*
 	-find . -name '*.pyc' -exec rm {} \;
@@ -9,4 +12,6 @@ test:
 	PYTHONPATH=$(PYTHONPATH) python manage.py test person
 
 syncdb:
-	PYTHONPATH=$(PYTHONPATH) python manage.py syncdb --no-input
+	PYTHONPATH= $(PYTHONPATH) DJANGO_SETTINGS_MODULE=$(PROJECT).settings $(MANAGE) syncdb --noinput --no-initial-data --migrate
+	PYTHONPATH= $(PYTHONPATH) python manage.py loaddata data.json
+
