@@ -18,7 +18,7 @@ class PersonTestCase(unittest.TestCase):
     """
     Test for model Person and main page
     """
-    fixtures = ['initial_data.json']
+    fixtures = ['data.json']
 
     def setUp(self):
         self.client = Client()
@@ -106,3 +106,15 @@ class EditLinkTagTest(unittest.TestCase):
         c = Context({"obj": self.obj})
         result = t.render(c)
         self.assertEqual(admin_edit_link, result.lstrip())
+
+
+class ModelsListCommandTest(unittest.TestCase):
+
+    def test_command(self):
+        from django.db.models import get_models
+
+        output = sys.stdout = StringIO()
+        call_command('appmodelslist person')
+        sys.stdout = sys.__stdout__
+        for model in get_models():
+            self.assertNotEqual(output.getvalue().find(model._meta.object_name), 0)
