@@ -11,5 +11,5 @@ test42cc/*.py~
 test42cc/person/*.py~
 cache
 django_cache
-test42cc/.idea
+#test42cc/.idea
 *.py~
