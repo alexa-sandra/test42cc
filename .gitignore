@@ -13,3 +13,5 @@ cache
 django_cache
 test42cc/.idea
 *.py~
+.idea
+.idea/*
