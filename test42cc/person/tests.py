@@ -21,10 +21,11 @@ class PersonTestCase(unittest.TestCase):
     fixtures = ['data.json']
 
     def setUp(self):
-        self.client = Client()
+        #self.client = Client()
+        pass
 
     def test_index(self):
-        response = self.client.get('')
+        response = self.client.get(reverse('/'))
         self.assertEqual(response.status_code, 200)
         person = Person.objects.latest('id')
         self.find(str(person.first_name))
