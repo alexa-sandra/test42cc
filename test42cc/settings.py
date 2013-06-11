@@ -150,6 +150,7 @@ INSTALLED_APPS = (
     'sorl.thumbnail',
     'south',
     'test42cc.person',
+    'test42cc.accounts',
     # Uncomment the next line to enable the admin:
     'django.contrib.admin',
 )
