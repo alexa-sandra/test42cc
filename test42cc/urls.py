@@ -8,7 +8,9 @@ from django.conf import settings
 admin.autodiscover()
 
 urlpatterns = patterns('',
-     url(r'^accounts/', include('accounts.urls')),
+     #url(r'^accounts/', include('accounts.urls')),
+     url(r'^login/$', 'django.contrib.auth.views.login', name='login'),
+     url(r'^logout/$', 'django.contrib.auth.views.logout_then_login', name='logout'),
      url(r'^$', views.index, name='index'),
      url(r'^edit/', views.edit, name='edit'),
      url(r'^admin/', include(admin.site.urls)),

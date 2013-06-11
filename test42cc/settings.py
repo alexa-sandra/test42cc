@@ -23,6 +23,9 @@ DATABASES = {
     }
 }
 
+LOGIN_REDIRECT_URL = "/"
+LOGIN_URL = "/login/"
+
 # Hosts/domain names that are valid for this site; required if DEBUG is False
 # See https://docs.djangoproject.com/en/1.5/ref/settings/#allowed-hosts
 ALLOWED_HOSTS = []
@@ -150,7 +153,6 @@ INSTALLED_APPS = (
     'sorl.thumbnail',
     'south',
     'test42cc.person',
-    'test42cc.accounts',
     # Uncomment the next line to enable the admin:
     'django.contrib.admin',
 )
