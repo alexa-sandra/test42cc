@@ -2,14 +2,14 @@
 {% load  edit_link %}
 
 {% block content %}
- <div style="width:750px">
+ <div class="container">
     {% if user.is_authenticated %}
         <a href="{% url 'edit' %}">Edit</a>&nbsp;
         <a href="{% admin_link info %}">Admin</a>
         <a href="{% url 'logout' %}">Logout</a>
     {% endif %}
     {% if info %}
-        <div style="float:left; width:300px">
+        <div class="leftSide">
         <p>Имя:{{ info.first_name }}</p>
         <p>Фамилия:{{ info.last_name }}</p>
         <p>Дата рождения:{{ info.birth_date|date:'d-m-Y' }}</p>
@@ -18,12 +18,12 @@
        {% endif %}
 
         </div>
-        <div style="float:right; width:300px">
+        <div class="rightSide">
         <p>e-mail:{{ info.email }}</p>
         <p>jabber:{{ info.jabber }}</p>
         <p>skype:{{ info.skype }}</p>
-        <p style = "height:300">Другое:{{ info.other_contacts|safe }}</p>
-        <p>Биография:{{ info.bio|safe }}</p>
+        <p class="textarea">Другое:{{ info.other_contacts|safe }}</p>
+        <p class="textarea">Биография:{{ info.bio|safe }}</p>
 
         </div>
     {% else %}

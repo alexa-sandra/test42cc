@@ -26,11 +26,11 @@
         </script>
 {% endblock %}
 {% block content %}
- <div style="width:650px">
+ <div class="container">
  {% if user.is_authenticated %}
  <form method="POST" action="." enctype="multipart/form-data" id="form_id">
  {% csrf_token %}
-        <div style="float:left; width:300px; height:700px">
+        <div class="leftSide">
         <p>{{ form.first_name.label_tag }}:{{ form.first_name }}</p>
         <p>{{ form.last_name.label_tag }}:{{ form.last_name }}</p>
         <p>{{ form.birth_date.label_tag }}:{{ form.birth_date }}</p>
@@ -40,19 +40,19 @@
         <p>{{ form.photo.label_tag }}:{{ form.photo }}</p>
       
  </div>
-<div style="float:right; width:300px; height:700px">
+<div lass="rightSide">
         <p>{{ form.email.label_tag }}:{{ form.email }}</p>
         <p>{{ form.jabber.label_tag }}:{{ form.jabber }}</p>
         <p>{{ form.skype.label_tag }}:{{ form.skype }}</p>
-        <p style = "height:300">{{ form.other_contacts.label_tag }}:{{ form.other_contacts|safe }}</p>
-        <p>{{ form.bio.label_tag }}:{{ form.bio|safe }}</p>
+        <p class align="textarea">{{ form.other_contacts.label_tag }}:{{ form.other_contacts|safe }}</p>
+        <p class="textarea">{{ form.bio.label_tag }}:{{ form.bio|safe }}</p>
 
 </div>
- <div style="float:left; width:200px;">
+ <div class="submit">
     <input type="submit" value="submit" />
     <a href="{% url 'index' %}">cancel</a>
  </div>
- <div id="progress" style="display: none;">Progressssssssssssssssss</div>
+ <div id="progress" >Progressssssssssssssssss</div>
  </form>
 
  {% else %}

@@ -9,7 +9,7 @@ runserver:
 	PYTHONPATH=$(PYTHONPATH) python manage.py runserver
 
 test:
-	PYTHONPATH=$(PYTHONPATH) python manage.py test person
+	PYTHONPATH=$(PYTHONPATH) DJANGO_SETTINGS_MODULE=$(PROJECT).settings $(MANAGE) test person
 
 syncdb:
 	PYTHONPATH= $(PYTHONPATH) DJANGO_SETTINGS_MODULE=$(PROJECT).settings $(MANAGE) syncdb --noinput --no-initial-data --migrate
