@@ -1,0 +1,34 @@
+body {
+    background-color:#ffffff;
+}
+
+.container {
+    width:750px;
+    margin:auto;
+    padding:10px;
+}
+
+.leftSide {
+    width:300px;
+    height:700px;
+    float:left;
+}
+.rightSide {
+    width:300px;
+    height:700px;
+    float:right;
+    
+}
+.textarea {
+    width:300px;
+    height:300px;
+}
+
+#progress{
+    display: none;
+}
+
+.submit{
+    float:left;
+    width:300px;
+}
