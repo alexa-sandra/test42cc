@@ -5,7 +5,7 @@ class HttpStoredQueryMiddleware:
         req = HttpStoredQuery()
         req.path = request.path
         req.method = request.method
-        if request.user.is_authenticated():
+        if request.user and request.user.is_authenticated():
            req.user = request.user
         req.save()
         return None
