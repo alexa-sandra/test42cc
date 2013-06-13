@@ -1,3 +1,5 @@
+SHELL := /bin/bash
+
 MANAGE=django-admin.py
 PROJECT=test42cc
 
@@ -9,9 +11,12 @@ runserver:
 	PYTHONPATH=$(PYTHONPATH) python manage.py runserver
 
 test:
-	PYTHONPATH=$(PYTHONPATH) DJANGO_SETTINGS_MODULE=$(PROJECT).settings $(MANAGE) test person
+	#PYTHONPATH=$(PYTHONPATH) DJANGO_SETTINGS_MODULE=$(PROJECT).settings $(MANAGE) test person
 
-syncdb:
-	PYTHONPATH= $(PYTHONPATH) DJANGO_SETTINGS_MODULE=$(PROJECT).settings $(MANAGE) syncdb --noinput --no-initial-data --migrate
+syncdb: clean_db
+	PYTHONPATH= $(PYTHONPATH) DJANGO_SETTINGS_MODULE=$(PROJECT).settings $(MANAGE) syncdb --noinput --no-initial-data #--migrate
 	PYTHONPATH= $(PYTHONPATH) python manage.py loaddata data.json
 
+clean_db:
+	rm -rf persondb
+	#-find path -type f -name "persondb" -delete

@@ -108,7 +108,6 @@ class EditLinkTagTest(unittest.TestCase):
         result = t.render(c)
         self.assertEqual(admin_edit_link, result.lstrip())
 
-
 class ModelsListCommandTest(unittest.TestCase):
 
     def test_command(self):
