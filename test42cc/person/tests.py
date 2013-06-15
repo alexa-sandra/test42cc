@@ -38,16 +38,17 @@ class PersonTestCase(unittest.TestCase):
 
 
 class HttpStoredQueryMiddlewareTest(unittest.TestCase):
+    """
+    Test middleware
+    """
 
     def setUp(self):
-        self.m = HttpStoredQueryMiddleware()
-        self.request = HttpStoredQuery()
+        self.client = Client()
 
     def test_request(self):
-        data = {'path': '', 'method': 'POST'}
-        self.assertEqual(self.m.process_request(self.request), None)
-        #self.assertIsInstance(self.request.path, HttpStoredQuery)
-        self.assertEqual(self.request.path, data['path'])
+        response = self.client.get(reverse('edit'))
+        req = HttpStoredQuery.objects.latest('id')
+        self.assertEqual(reverse('edit'), req.path)
 
         
 class ContextProcessorTest(unittest.TestCase):
