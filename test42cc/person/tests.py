@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 from StringIO import StringIO
 import sys
-from django.conf import settings
 from django.contrib.auth.models import User
 from django.core.management import call_command
 from django.core.urlresolvers import reverse
@@ -41,7 +40,6 @@ class HttpStoredQueryMiddlewareTest(unittest.TestCase):
     """
     Test middleware
     """
-
     def setUp(self):
         self.client = Client()
 
