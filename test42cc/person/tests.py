@@ -48,18 +48,14 @@ class HttpStoredQueryMiddlewareTest(unittest.TestCase):
         req = HttpStoredQuery.objects.latest('id')
         self.assertEqual(reverse('edit'), req.path)
 
-        
-class ContextProcessorTest(unittest.TestCase):
-    """
-    Test contextProcessor
-    """
-    def test_settings_in_context(self):
-        #self.response = Client().get('/')
-        #self.assertEqual(settings, self.response.context['settings'])
-        #self.assertTrue('settings' in self.response.context)
 
-        default_context = RequestContext(HttpRequest())
-        self.assertTrue(default_context.has_key('SETTINGS'))
+#class ContextProcessorTest(unittest.TestCase):
+#    """
+#    Test contextProcessor
+#    """
+#    def test_settings_in_context(self):
+#        default_context = RequestContext(HttpRequest())
+#        self.assertTrue(default_context.has_key('SETTINGS'))
 
 
 class TestEditForm(unittest.TestCase):
