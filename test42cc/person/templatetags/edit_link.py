@@ -12,7 +12,9 @@ def edit_link_in_admin(parser, token):
     :return:AdminEditLinkObject
     """
     try:
+        print token
         tag_name, item = token.split_contents()
+
     except ValueError:
         raise template.TemplateSyntaxError("%r tag requires exectly two argumments" %token.contents.split()[0])
     if not item:
@@ -32,6 +34,7 @@ class AdminEditLink(template.Node):
             actual_item = self.item.resolve(context)
             object_admin_url = urlresolvers.reverse("admin:%s_%s_change" % (actual_item._meta.app_label, actual_item._meta.module_name),
                                                     args=(actual_item.pk,))
+            
             return object_admin_url
         except template.VariableDoesNotExist:
             return ''

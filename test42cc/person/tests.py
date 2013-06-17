@@ -91,24 +91,25 @@ class TestEditForm(unittest.TestCase):
         response = self.client.get(reverse('edit'))
         self.assertTrue('<!DOCTYPE HTML>' in response.content)
 
-"""
+
 class EditLinkTagTest(unittest.TestCase):
-"""
-#    Test for template tag for edit object from template in admin site
-"""
+    """
+    Test for template tag for edit object from template in admin site
+    """
+    
     def setUp(self):
         self.obj = Person.objects.get(pk=1)
         self.client = Client()
 
     def testEditLinkObject(self):
+        link = '/admin/person/person/1/'
         t = Template('{% load edit_link %}{% admin_link obj %}')
         self.client.login(username="admin", password="admin")
         c = Context({"obj": self.obj})
-        admin_edit_link = edit_link_in_admin('', {'obj': self.obj})
         result = t.render(c)
-        self.assertEqual(admin_edit_link, result.lstrip())
+        self.assertEqual(link, result)
 
-
+"""
 class ModelsListCommandTest(unittest.TestCase):
 
     def test_command(self):
