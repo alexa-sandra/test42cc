@@ -49,13 +49,13 @@ class HttpStoredQueryMiddlewareTest(unittest.TestCase):
         self.assertEqual(reverse('edit'), req.path)
 
 
-#class ContextProcessorTest(unittest.TestCase):
-#    """
-#    Test contextProcessor
-#    """
-#    def test_settings_in_context(self):
-#        default_context = RequestContext(HttpRequest())
-#        self.assertTrue(default_context.has_key('SETTINGS'))
+class ContextProcessorTest(unittest.TestCase):
+    """
+    Test contextProcessor
+    """
+    def test_settings_in_context(self):
+        default_context = RequestContext(HttpRequest())
+        self.assertTrue(default_context.has_key('SETTINGS'))
 
 
 class TestEditForm(unittest.TestCase):
