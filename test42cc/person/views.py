@@ -5,8 +5,9 @@ from django.http import HttpResponse
 from django.http.response import HttpResponseRedirect
 from django.shortcuts import render
 from django.template import loader, Context
-from models import Person
+from models import Person, HttpStoredQuery
 from forms import PersonForm
+
 
 def index(request):
     try:
@@ -41,3 +42,11 @@ def edit(request):
     else:
         form = PersonForm(instance=info)
         return render(request, 'edit.html', locals())
+
+
+def storedRequests(request):
+    try:
+        req = HttpStoredQuery.objects.all().order_by('date_with_time')[:10]
+    except HttpStoredQuery.DoesNotExist:
+        req = []
+    return render(request, 'requests.html', {'request_list': req})

@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+<div class="container">
+    <legend>Request List</legend>
+    <table id="requests">
+    <tr>
+        <th>Date&Time</th>
+        <th>Path</th>
+        <th>User</th>
+        <th>Method</th>
+        <th>Priority</th>
+
+    </tr>
+    {% for req in request_list %}
+
+    <tr>
+        <td>
+           {{ req.date_with_time|date:"d m H:i:s.u" }}
+        </td>
+        <td>
+           {{ req.path }}
+        </td>
+        <td>
+           {{ req.user|default_if_none:'---' }}
+        </td>
+        <td>
+           {{ req.method }}
+        </td>
+        <td>
+           {{ req.priority }}
+        </td>
+    </tr>
+    {% endfor %}
+    </table>
+</div>
+
+{% endblock content%}
