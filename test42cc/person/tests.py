@@ -109,16 +109,15 @@ class EditLinkTagTest(unittest.TestCase):
         result = t.render(c)
         self.assertEqual(link, result)
 
-"""
+
 class ModelsListCommandTest(unittest.TestCase):
 
     def test_command(self):
         from django.db.models import get_models
 
         output = sys.stdout = StringIO()
-        call_command('appmodelslist person')
+        call_command('appmodelslist', 'person')
         sys.stdout = sys.__stdout__
-        for model in get_models():
-            self.assertNotEqual(output.getvalue().find(model._meta.object_name), 0)
-"""
+        for model in get_models('person'):
+            self.assertEqual(output.getvalue().find(model.__name__), 0)
 
