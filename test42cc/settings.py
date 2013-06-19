@@ -125,6 +125,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 
 ROOT_URLCONF = 'test42cc.urls'
 
+DJANGO_SETTINGS_MODULE = 'test42cc.settings'
 # Python dotted path to the WSGI application used by Django's runserver.
 WSGI_APPLICATION = 'test42cc.wsgi.application'
 

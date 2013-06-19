@@ -5,15 +5,15 @@ body {
 .container {
     position:relative;
     padding:10px;
-    height:600px;
+    height:700px;
 }
 
 .leftSide {
-    width:300px;
+    width:400px;
     float:left;
 }
 .centerSide {
-    width:300px;
+    width:400px;
     float:left;
     
 }
@@ -27,7 +27,7 @@ body {
 .textarea {
     width:200px;
     height:200px;
-    background-color: #E8E8E8;
+    
 }
 
 #progress{
@@ -37,6 +37,7 @@ body {
 .submit{
     float:left;
     width:300px;
+    
 }
 
 .underline {
