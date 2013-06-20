@@ -126,10 +126,18 @@ class ModelsListCommandTest(unittest.TestCase):
         for model in get_models('person'):
             self.assertEqual(output.getvalue().find(model.__name__), 0)
 
+        outputerr = sys.stderr = StringIO()
+        call_command('appmodelslist', 'person', prefix='--err-stderr')
+        sys.stderr = sys.__stderr__
+        for model in get_models('person'):
+            self.assertTrue(outputerr.getvalue().find('err'))
+            self.assertEqual(outputerr.getvalue().find('error:%s' % model.__name__))
+
 
 class TestSignals(unittest.TestCase):
     def test_signals(self):
-        user = Person(2, "New Name", "LastName", datetime.datetime.strptime("30 Nov 00", "%d %b %y").date(), "bio", "mail@mail.com", "name_", "my_jabber@djabber.com",
+        user = Person(2, "New Name", "LastName", datetime.datetime.strptime("30 Nov 00", "%d %b %y").date(),
+                      "bio", "mail@mail.com", "name_", "my_jabber@djabber.com",
                       "other")
         user.save()
         record = ModelsActions.objects.latest('date_with_time')
