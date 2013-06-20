@@ -8,6 +8,7 @@ clean:
 	-find . -name '*.pyc' -exec rm {} \;
 
 runserver:
+    PYTHONPATH= $(PYTHONPATH) DJANGO_SETTINGS_MODULE=$(PROJECT).settings $(MANAGE) collectstatic
 	PYTHONPATH=$(PYTHONPATH) python manage.py runserver
 
 test:

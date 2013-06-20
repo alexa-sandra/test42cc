@@ -88,7 +88,7 @@ STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.DefaultStorageFinder',
 )
 
-ADMIN_MEDIA_PREFIX = STATIC_URL + 'admin_tools/'
+#ADMIN_MEDIA_PREFIX = STATIC_URL + 'admin_tools/'
 
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = '(1zf^^qg&k6b7i9s5#vug9d8aw4)+ztt#&0adk5)9!vfv@)o^y'
