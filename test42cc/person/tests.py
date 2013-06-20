@@ -8,7 +8,7 @@ from django.core.urlresolvers import reverse
 from django.http import HttpRequest
 from django.template import Template, Context, RequestContext
 from django.test.client import Client
-
+from django.test import TestCase
 from django.utils import unittest
 import time
 from middleware import HttpStoredQueryMiddleware
@@ -16,7 +16,7 @@ from models import Person, HttpStoredQuery, ModelsActions
 from templatetags.edit_link import edit_link_in_admin
 
 
-class PersonTestCase(unittest.TestCase):
+class PersonTestCase(TestCase):
     """
     Test for model Person and main page
     """
@@ -38,7 +38,7 @@ class PersonTestCase(unittest.TestCase):
         self.assertEqual(str(person.skype), 'alexa_sandra_')
 
 
-class HttpStoredQueryMiddlewareTest(unittest.TestCase):
+class HttpStoredQueryMiddlewareTest(TestCase):
     """
     Test middleware
     """
@@ -51,7 +51,7 @@ class HttpStoredQueryMiddlewareTest(unittest.TestCase):
         self.assertEqual(reverse('edit'), req.path)
 
 
-class ContextProcessorTest(unittest.TestCase):
+class ContextProcessorTest(TestCase):
     """
     Test contextProcessor
     """
@@ -63,7 +63,7 @@ class ContextProcessorTest(unittest.TestCase):
             pass
 
 
-class TestEditForm(unittest.TestCase):
+class TestEditForm(TestCase):
     """
     Test edit form
     """
@@ -97,7 +97,7 @@ class TestEditForm(unittest.TestCase):
         self.assertTrue('<!DOCTYPE HTML>' in response.content)
 
 
-class EditLinkTagTest(unittest.TestCase):
+class EditLinkTagTest(TestCase):
     """
     Test for template tag for edit object from template in admin site
     """
@@ -115,7 +115,7 @@ class EditLinkTagTest(unittest.TestCase):
         self.assertEqual(link, result)
 
 
-class ModelsListCommandTest(unittest.TestCase):
+class ModelsListCommandTest(TestCase):
 
     def test_command(self):
         from django.db.models import get_models
@@ -134,7 +134,7 @@ class ModelsListCommandTest(unittest.TestCase):
             self.assertEqual(outputerr.getvalue().find('error:%s' % model.__name__))
 
 
-class TestSignals(unittest.TestCase):
+class TestSignals(TestCase):
     def test_signals(self):
         user = Person(2, "New Name", "LastName", datetime.datetime.strptime("30 Nov 00", "%d %b %y").date(),
                       "bio", "mail@mail.com", "name_", "my_jabber@djabber.com",
