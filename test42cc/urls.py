@@ -17,7 +17,7 @@ urlpatterns = patterns('',
                        url(r'^admin/', include(admin.site.urls)),
                        url(r'^requests/', views.storedRequests, name='requests'),
                        url(r'^admin_tools/', include('admin_tools.urls')),
-) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+)+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 try:
     if settings.DEBUG:# defined in manage.py when the first arg is "runserver"
@@ -25,6 +25,8 @@ try:
                                 (r'^media/(?P<path>.*)$', 'django.views.static.serve',
                                  {'document_root': settings.MEDIA_ROOT}),
                                 (r'^media-admin/(?P<path>.*)$', 'django.views.static.serve', {'document_root': os.path.
-                                join(settings.MEDIA_ROOT, settings.ADMIN_MEDIA_PREFIX)}), )
+                                join(settings.MEDIA_ROOT, settings.ADMIN_MEDIA_PREFIX)}),
+                                (r'^static/(?P<path>.*)$', 'django.views.static.serve',
+                                 {'document_root': settings.STATIC_ROOT}),)
 except NameError:
     pass
