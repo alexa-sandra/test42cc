@@ -8,7 +8,6 @@ clean:
 	-find . -name '*.pyc' -exec rm {} \;
 
 runserver:
-    PYTHONPATH= $(PYTHONPATH) python manage.py collectstatic
 	PYTHONPATH=$(PYTHONPATH) python manage.py runserver
 
 test:
@@ -21,4 +20,3 @@ syncdb: clean_db
 clean_db:
 	rm -rf persondb
 	#-find path -type f -name "persondb" -delete
-
