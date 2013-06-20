@@ -24,7 +24,8 @@ try:
         urlpatterns += patterns('',
                                 (r'^media/(?P<path>.*)$', 'django.views.static.serve',
                                  {'document_root': settings.MEDIA_ROOT}),
-                                (r'^media-admin/(?P<path>.*)$', 'django.views.static.serve', {'document_root': os.path.
-                                join(settings.MEDIA_ROOT, settings.ADMIN_MEDIA_PREFIX)}), )
+                                #r'^media-admin/(?P<path>.*)$', 'django.views.static.serve', {'document_root': os.path.
+                                #join(settings.MEDIA_ROOT, settings.ADMIN_MEDIA_PREFIX)}),
+                                )
 except NameError:
     pass
