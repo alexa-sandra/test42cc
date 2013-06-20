@@ -21,11 +21,10 @@ urlpatterns = patterns('',
 
 try:
     if settings.DEBUG:# defined in manage.py when the first arg is "runserver"
-        urlpatterns += patterns((r'^media/(?P<path>.*)$', 'django.views.static.serve',
+        urlpatterns += patterns('',
+                                (r'^media/(?P<path>.*)$', 'django.views.static.serve',
                                  {'document_root': settings.MEDIA_ROOT}),
                                 (r'^media-admin/(?P<path>.*)$', 'django.views.static.serve', {'document_root': os.path.
-                                join(settings.MEDIA_ROOT, settings.ADMIN_MEDIA_PREFIX)}),
-                                (r'^static/(?P<path>.*)$', 'django.views.static.serve',
-                                 {'document_root': settings.STATIC_ROOT}),)
+                                join(settings.MEDIA_ROOT, settings.ADMIN_MEDIA_PREFIX)}), )
 except NameError:
     pass
