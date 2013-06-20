@@ -7,6 +7,7 @@ from django.utils.html import escape, conditional_escape
 from django.utils.encoding import force_unicode
 from django.forms.widgets import ClearableFileInput, Input, CheckboxInput
 
+
 class DatePickerWidget(forms.DateInput):
     class Media:
         css = {
@@ -47,12 +48,10 @@ class PersonForm(ModelForm):
     class Meta:
         model = Person
         widgets = {
-            'bio' : Textarea({'cols':40, 'rows':10}),
-            'other_contacts' : Textarea({'cols':40, 'rows':10}),
-            'birth_date':DatePickerWidget(params="dateFormat: 'dd.mm.yy', changeYear: true"),
-            'photo' :CustomClearableFileInput(),
-                   }
-
+            'bio': Textarea({'cols':40, 'rows':10}),
+            'other_contacts': Textarea({'cols':40, 'rows':10}),
+            'birth_date': DatePickerWidget(params="dateFormat: 'dd.mm.yy', changeYear: true"),
+            'photo': CustomClearableFileInput(),}
 
     def __init__(self, *args, **kwargs):
         super(PersonForm, self).__init__(*args, **kwargs)
