@@ -13,6 +13,7 @@ runserver:
 test:
 	#PYTHONPATH=$(PYTHONPATH) DJANGO_SETTINGS_MODULE=$(PROJECT).settings $(MANAGE) test person
 
+
 syncdb: clean_db
 	PYTHONPATH= $(PYTHONPATH) DJANGO_SETTINGS_MODULE=$(PROJECT).settings $(MANAGE) syncdb --noinput --no-initial-data #--migrate
 	PYTHONPATH= $(PYTHONPATH) python manage.py loaddata data.json

@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from StringIO import StringIO
 import sys
+import datetime
 from django.contrib.auth.models import User
 from django.core.management import call_command
 from django.core.urlresolvers import reverse
@@ -9,8 +10,9 @@ from django.template import Template, Context, RequestContext
 from django.test.client import Client
 
 from django.utils import unittest
+import time
 from middleware import HttpStoredQueryMiddleware
-from models import Person, HttpStoredQuery
+from models import Person, HttpStoredQuery, ModelsActions
 from templatetags.edit_link import edit_link_in_admin
 
 
@@ -123,4 +125,25 @@ class ModelsListCommandTest(unittest.TestCase):
         sys.stdout = sys.__stdout__
         for model in get_models('person'):
             self.assertEqual(output.getvalue().find(model.__name__), 0)
+
+
+class TestSignals(unittest.TestCase):
+    def test_signals(self):
+        user = Person(2, "New Name", "LastName", datetime.datetime.strptime("30 Nov 00", "%d %b %y").date(), "bio", "mail@mail.com", "name_", "my_jabber@djabber.com",
+                      "other")
+        user.save()
+        record = ModelsActions.objects.latest('date_with_time')
+        self.assertEqual(record.action, 0)
+
+        user.bio = "This is new Biography"
+        user.save()
+        record = ModelsActions.objects.latest('date_with_time')
+        self.assertEqual(record.action, 1)
+
+        user.delete()
+        record = ModelsActions.objects.latest('date_with_time')
+
+        self.assertEqual(record.action, 2)
+
+
 
