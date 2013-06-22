@@ -48,3 +48,23 @@ body {
     width:100%;
     border:1px black;
 }
+
+.container_inline{
+    height:200px;
+    width: 900px;
+    padding: 20px;
+    border:1px solid black;
+}
+.textarea_inline{
+    width:400px;
+    height:200px;
+}
+
+.container_inline .leftSide {
+    width: 200px;
+    height:200px;
+}
+
+.container .container_inline {
+    margin-bottom: 20px;
+}

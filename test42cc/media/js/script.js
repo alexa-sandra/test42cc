@@ -9,15 +9,15 @@ $(function(){
                       $("#progress").hide();
                       $('input:submit').removeAttr("disabled");
                       data = $.parseJSON(responce);
-                      alert(responce);
-                      alert(data['errors']);
-                      alert(data['status']);
                       if (data['status'] == 1){
                           err = data['errors'];
                           $.each(err, function(name, error) {
                               $("#errors_list").append(name + ": " + error);
                            });
                                                    }
+                      else {
+                          window.location.href = data['redirect'];
+                      }
                  }
                  });
                  return false;

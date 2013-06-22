@@ -65,13 +65,18 @@ def create_new_account(request):
             if request.FILES:
                 form.cleaned_data['photo'] = request.FILES['photo']
             form.save()
-            return HttpResponse(json.dumps({'status': 0}))
+            return HttpResponse(json.dumps({'status': 0, 'redirect': reverse('persons')}))
         else:
             errors = form.errors
-            print errors
-            #print locals()
             return HttpResponse(json.dumps({'status': 1, 'errors': errors}))
-        #return render(request, 'edit.html', {'errors': errors})
     else:
         form = PersonForm()
         return render(request, 'edit.html', locals())
+
+
+def persons_lists(request):
+    try:
+        req = Person.objects.all()[:10]
+    except Person.DoesNotExist:
+        req = []
+    return render(request, 'persons_list.html', {'list_info': req})

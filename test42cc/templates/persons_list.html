@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="container">
+    {% for item in list_info %}
+         {% include "person_inline.html" with info=item %}
+    {% endfor %}
+    </div>
+{% endblock %}
