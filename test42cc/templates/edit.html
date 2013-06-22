@@ -14,6 +14,9 @@
  <form method="POST" action="." enctype="multipart/form-data" id="form_id">
  {% csrf_token %}
  <div class="container">
+        {% if form.errors %}
+             {{form.email.errors}}
+        {% endif %}
         <div class="leftSide">
         <p>{{ form.first_name.label_tag }}:{{ form.first_name }}</p>
         <p>{{ form.last_name.label_tag }}:{{ form.last_name }}</p>

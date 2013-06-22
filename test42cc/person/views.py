@@ -51,9 +51,18 @@ def storedRequests(request):
         req = []
     return render(request, 'requests.html', {'request_list': req})
 
+
 def create_new_account(request):
     if request.is_ajax():
-        pass
+        form = PersonForm(request.POST, request.FILES)
+        if form.is_valid():
+            if request.FILES:
+                form.cleaned_data['photo'] = request.FILES['photo']
+            form.save()
+
+        return render(request, 'edit.html', locals())
+
+
     else:
         form = PersonForm()
         return render(request, 'edit.html', locals())
