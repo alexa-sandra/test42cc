@@ -50,3 +50,10 @@ def storedRequests(request):
     except HttpStoredQuery.DoesNotExist:
         req = []
     return render(request, 'requests.html', {'request_list': req})
+
+def create_new_account(request):
+    if request.is_ajax():
+        pass
+    else:
+        form = PersonForm()
+        return render(request, 'edit.html', locals())
