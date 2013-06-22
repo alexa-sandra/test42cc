@@ -154,4 +154,21 @@ class TestSignals(TestCase):
         self.assertEqual(record.action, 2)
 
 
+class TestCreatePersonEntry(TestCase):
+    """
+    Test edit form
+    """
+    def setUp(self):
+        self.client = Client()
 
+    def test_create_new_account(self):
+        response = self.client.get(reverse('create'))
+        self.assertEqual(response.status_code, 200)
+
+        new_data = Person.objects.values().get(pk=1)
+        new_data['birth_date'] = '1987-12-13'
+        new_data['bio'] = 'test test test test'
+
+        self.client.post('create', data=new_data)
+        response = self.client.get(reverse('create'))
+        self.assertTrue('<!DOCTYPE HTML>' in response.content)

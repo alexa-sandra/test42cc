@@ -65,7 +65,7 @@ def create_new_account(request):
             if request.FILES:
                 form.cleaned_data['photo'] = request.FILES['photo']
             form.save()
-            return HttpResponse(json.dumps({'status': 0, 'redirect': reverse('persons')}))
+            return HttpResponse(json.dumps(dict(status=0, redirect=reverse('persons'))))
         else:
             errors = form.errors
             return HttpResponse(json.dumps({'status': 1, 'errors': errors}))
@@ -75,6 +75,11 @@ def create_new_account(request):
 
 
 def persons_lists(request):
+    """
+    Render page with 10 entries of Person Model
+    :param request:
+    :return:
+    """
     try:
         req = Person.objects.all()[:10]
     except Person.DoesNotExist:
