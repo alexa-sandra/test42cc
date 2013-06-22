@@ -13,8 +13,12 @@
  {% if user.is_authenticated %}
  <form method="POST" action="." enctype="multipart/form-data" id="form_id">
  {% csrf_token %}
+ <div id="errors_list">
+
+ </div>
+
+ {{ form.non_field_errors }}
  <div class="container">
-        {{ form.non_field_errors }}
         <div class="leftSide">
         <p>{{ form.first_name.label_tag }}:{{ form.first_name }}</p>
         <p>{{ form.last_name.label_tag }}:{{ form.last_name }}</p>
