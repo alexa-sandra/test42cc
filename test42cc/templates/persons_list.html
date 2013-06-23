@@ -1,5 +1,11 @@
 {% extends "base.html" %}
-
+{% block script %}
+        <script type = "text/javascript">
+            $('.container_inline').click(function () {
+                top.location.href = {% url 'persons' %}
+            });
+        </script>
+{% endblock %}
 {% block content %}
     <div class="container">
     {% for item in list_info %}
