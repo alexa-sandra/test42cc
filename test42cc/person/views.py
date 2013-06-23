@@ -81,7 +81,7 @@ def persons_lists(request):
     :return:
     """
     try:
-        req = Person.objects.all()[:10]
+        req = Person.objects.all().order_by('-id')[:10]
     except Person.DoesNotExist:
         req = []
     return render(request, 'persons_list.html', {'list_info': req})
