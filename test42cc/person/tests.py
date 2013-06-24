@@ -150,5 +150,8 @@ class TestCreatePersonEntry(TestCase):
 
         self.client.post(reverse("create", kwargs={'itemId': 1}), data=new_data)
         response = self.client.get(reverse("create", kwargs={'itemId': 1}))
-        self.assertTrue('<!DOCTYPE HTML>' in response.content)
+        #self.assertTrue('<!DOCTYPE HTML>' in response.content)
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.context['form']['first_name'].value(), new_data['first_name'])
+
 
