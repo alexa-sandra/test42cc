@@ -47,9 +47,9 @@ class HttpStoredQueryMiddlewareTest(TestCase):
         self.client = Client()
 
     def test_request(self):
-        response = self.client.get(reverse('edit'))
+        response = self.client.get(reverse("edit_entry", kwargs={'itemId': 1}))
         req = HttpStoredQuery.objects.latest('id')
-        self.assertEqual(reverse('edit'), req.path)
+        self.assertEqual(reverse("edit_entry", kwargs={'itemId': 1}), req.path)
 
 
 class ContextProcessorTest(TestCase):
@@ -63,41 +63,6 @@ class ContextProcessorTest(TestCase):
             self.assertTrue(default_context.has_key('SETTINGS'))
         except ImportError:
             pass
-
-
-class TestEditForm(TestCase):
-    """
-    Test edit form
-    """
-
-    def setUp(self):
-        self.client = Client()
-        self.admin = Client()
-        self.admin.login(username='admin', password='admin')
-
-    def test_login(self):
-        response = self.admin.get(reverse('login'))
-        self.assertEqual(response.status_code, 200)
-
-    def test_edit_form(self):
-        user = User.objects.get(pk=1)
-        # User not logged in
-        response = self.client.get(reverse('edit'))
-        self.assertEqual(response.status_code, 302)
-
-        self.client.login(username=user.username, password='admin')
-
-        # Valid user
-        response = self.client.get(reverse('edit'))
-        self.assertEqual(response.status_code, 200)
-
-        #Form
-        new_data = Person.objects.values().get(id=1)
-        new_data['birth_date'] = '1987-12-13'
-
-        self.client.post('edit', data=new_data)
-        response = self.client.get(reverse('edit'))
-        self.assertTrue('<!DOCTYPE HTML>' in response.content)
 
 
 class EditLinkTagTest(TestCase):

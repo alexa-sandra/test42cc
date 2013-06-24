@@ -18,33 +18,6 @@ def index(request):
     return render(request, 'index.html', {'info': info})
 
 
-@login_required()
-def edit(request):
-    try:
-        info = Person.objects.get(pk=1)
-    except Person.DoesNotExist:
-        return render(request, 'index.html', {'info': None})
-
-    if request.is_ajax():#submit ajax form
-        form = PersonForm(request.POST, request.FILES, instance=info)
-        if form.is_valid():
-            if request.FILES:
-                form.cleaned_data['photo'] = request.FILES['photo']
-            form.save()
-            return render(request, 'edit.html', locals()) # Redirect after POST
-
-    if request.method == 'POST':
-        form = PersonForm(request.POST, request.FILES, instance=info)
-        if form.is_valid():
-            if request.FILES:
-                form.cleaned_data['photo'] = request.FILES['photo']
-            form.save()
-            return HttpResponseRedirect(reverse(index)) # Redirect after POST
-    else:
-        form = PersonForm(instance=info)
-        return render(request, 'edit.html', locals())
-
-
 def storedRequests(request):
     try:
         req = HttpStoredQuery.objects.all().order_by('date_with_time')[:10]
