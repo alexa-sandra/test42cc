@@ -42,6 +42,7 @@ class HttpStoredQueryMiddlewareTest(TestCase):
     """
     Test middleware
     """
+
     def setUp(self):
         self.client = Client()
 
@@ -55,6 +56,7 @@ class ContextProcessorTest(TestCase):
     """
     Test contextProcessor
     """
+
     def test_settings_in_context(self):
         try:
             default_context = RequestContext(HttpRequest())
@@ -67,6 +69,7 @@ class TestEditForm(TestCase):
     """
     Test edit form
     """
+
     def setUp(self):
         self.client = Client()
         self.admin = Client()
@@ -101,7 +104,7 @@ class EditLinkTagTest(TestCase):
     """
     Test for template tag for edit object from template in admin site
     """
-    
+
     def setUp(self):
         self.obj = Person.objects.get(pk=1)
         self.client = Client()
@@ -116,7 +119,6 @@ class EditLinkTagTest(TestCase):
 
 
 class ModelsListCommandTest(TestCase):
-
     def test_command(self):
         from django.db.models import get_models
 
@@ -158,6 +160,7 @@ class TestCreatePersonEntry(TestCase):
     """
     Test edit form
     """
+
     def setUp(self):
         self.client = Client()
 
@@ -172,3 +175,17 @@ class TestCreatePersonEntry(TestCase):
         self.client.post('create', data=new_data)
         response = self.client.get(reverse('create'))
         self.assertTrue('<!DOCTYPE HTML>' in response.content)
+
+    def test_edit_account(self):
+        response = self.client.get(reverse("edit_entry", kwargs={'itemId': 1}))
+        self.assertEqual(response.status_code, 200)
+
+        self.assertTrue('<!DOCTYPE HTML>' in response.content)
+
+        new_data = Person.objects.values().get(id=1)
+        new_data['birth_date'] = '1987-12-28'
+
+        self.client.post(reverse("edit_entry", kwargs={'itemId': 1}), data=new_data)
+        response = self.client.get(reverse("edit_entry", kwargs={'itemId': 1}))
+        self.assertTrue('<!DOCTYPE HTML>' in response.content)
+

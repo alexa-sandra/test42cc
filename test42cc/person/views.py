@@ -53,14 +53,22 @@ def storedRequests(request):
     return render(request, 'requests.html', {'request_list': req})
 
 
-def create_new_account(request):
+def create_new_account(request, itemId=None):
     """
     View for saving new Person entry
+    :param itemId:
     :param request:
     :return:
     """
+    entry = None
+    try:
+        itemId = request.path.strip().split('/')[2:3][0]
+        entry = Person.objects.get(id=int(itemId))
+    except ValueError:
+        pass
+
     if request.is_ajax():
-        form = PersonForm(request.POST, request.FILES)
+        form = PersonForm(request.POST, request.FILES, instance=entry)
         if form.is_valid():
             if request.FILES:
                 form.cleaned_data['photo'] = request.FILES['photo']
@@ -70,7 +78,7 @@ def create_new_account(request):
             errors = form.errors
             return HttpResponse(json.dumps({'status': 1, 'errors': errors}))
     else:
-        form = PersonForm()
+        form = PersonForm(instance=entry)
         return render(request, 'edit.html', locals())
 
 
