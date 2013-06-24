@@ -1,4 +1,4 @@
-<div class="container_inline" id="{{ info.id }}">
+<div class="container_inline" id="{{ info.id }}" onclick="window.location.href='{% url 'create' info.id %}'">
     <div class="leftSide">
         <p>{{ info.first_name }}&nbsp;{{ info.last_name }}</p>
         <p>{{ info.birth_date|date:'d-m-Y' }}</p>

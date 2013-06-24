@@ -1,21 +1,4 @@
 {% extends "base.html" %}
-{% block header %}
- <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
-<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
-<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
-{% endblock %}
-{% block script %}
-        <script type = "text/javascript">
-            urlMap = {
-            {% for item in list_info %}
-                '{{ item.id }}' : '{% url 'edit_entry' item.id %}'{% if not forloop.last %},{% endif %}
-            {% endfor %}
-            };
-            $(".container_inline").click(function () {
-                top.location.href = urlMap[$(this).attr('id')];
-            });
-        </script>
-{% endblock %}
 {% block content %}
     <div class="container">
     {% for item in list_info %}

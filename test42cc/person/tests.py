@@ -142,15 +142,13 @@ class TestCreatePersonEntry(TestCase):
         self.assertTrue('<!DOCTYPE HTML>' in response.content)
 
     def test_edit_account(self):
-        response = self.client.get(reverse("edit_entry", kwargs={'itemId': 1}))
+        response = self.client.get(reverse("create", kwargs={'itemId': 1}))
         self.assertEqual(response.status_code, 200)
-
-        self.assertTrue('<!DOCTYPE HTML>' in response.content)
 
         new_data = Person.objects.values().get(id=1)
         new_data['birth_date'] = '1987-12-28'
 
-        self.client.post(reverse("edit_entry", kwargs={'itemId': 1}), data=new_data)
-        response = self.client.get(reverse("edit_entry", kwargs={'itemId': 1}))
+        self.client.post(reverse("create", kwargs={'itemId': 1}), data=new_data)
+        response = self.client.get(reverse("create", kwargs={'itemId': 1}))
         self.assertTrue('<!DOCTYPE HTML>' in response.content)
 

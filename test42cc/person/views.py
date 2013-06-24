@@ -35,9 +35,8 @@ def create_new_account(request, itemId=None):
     """
     entry = None
     try:
-        itemId = request.path.strip().split('/')[2:3][0]
-        entry = Person.objects.get(id=int(itemId))
-    except ValueError:
+        entry = Person.objects.get(id=itemId)
+    except Person.DoesNotExist:
         pass
 
     if request.is_ajax():
