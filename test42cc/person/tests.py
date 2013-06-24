@@ -47,9 +47,9 @@ class HttpStoredQueryMiddlewareTest(TestCase):
         self.client = Client()
 
     def test_request(self):
-        response = self.client.get(reverse("edit_entry", kwargs={'itemId': 1}))
+        response = self.client.get(reverse("create", kwargs={'itemId': 1}))
         req = HttpStoredQuery.objects.latest('id')
-        self.assertEqual(reverse("edit_entry", kwargs={'itemId': 1}), req.path)
+        self.assertEqual(reverse("create", kwargs={'itemId': 1}), req.path)
 
 
 class ContextProcessorTest(TestCase):
